@@ -8,13 +8,13 @@ Object.prototype[Symbol.iterator] = function* () {
 
 Object.defineProperty(
     Object.prototype, 'each', {
-      value: function(callback, thisObj){
-               for(const key of Object.keys(this)){
-                 callback.call(thisObj, this[key], key, this);
+        value: function(callback, thisObj){
+                   for(const key of Object.keys(this)){
+                      callback.call(thisObj, this[key], key, this);
+                   }
                }
-             }
-    }
-    );
+       }
+);
 
 Object.defineProperty(Object.prototype, 'length', {
   get: function(){return Object.keys(this).length;}
