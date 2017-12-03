@@ -24,7 +24,7 @@ Object.defineProperty(
        }
 );
 
-Object.defineProperty(Object.prototype, 'length', {
+Object.defineProperty(Object.prototype, 'ownLength', {
   get: function(){return Object.keys(this).length;}
 });
 
