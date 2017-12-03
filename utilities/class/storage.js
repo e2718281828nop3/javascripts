@@ -3,6 +3,7 @@
 // @author e2.718281828.nop3
 // @copyright 2017, e2.718281828.nop3
 // @license GPLv3
+// @namespace https://openuserjs.org/users/e2.718281828.nop3
 // @exclude *
 const StorageFactory = class StorageFactory {
   static load(namespace, scope, storeMethod){
