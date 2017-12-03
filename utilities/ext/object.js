@@ -1,3 +1,10 @@
+// @name Object extension
+// @version 0.1
+// @author e2.718281828.nop3
+// @copyright 2017, e2.718281828.nop3
+// @license GPLv3
+// @exclude *
+
 //let Object.prototype be iterable.
 //includes enumerable && own properties.
 Object.prototype[Symbol.iterator] = function* () {
