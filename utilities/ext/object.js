@@ -5,6 +5,10 @@
 // @license GPLv3
 // @namespace https://github.com/e2718281828nop3/
 // @exclude *
+if (!Object.prototype.hasOwnProperty('e2718281828nop3')) {
+Object.defineProperty(
+    Object.prototype, 'e2718281828nop3', {value:'e2718281828nop3'});
+
 
 //let Object.prototype be iterable.
 //includes enumerable && own properties.
@@ -43,11 +47,11 @@ Object.defineProperty(Object.prototype, 'include', {
   enumerable: false,
   value: function(source) {
     if (source.proto !== null && source.proto !== this.proto)
-  throw new Error('prototype of include object must be null or same as base object.');
-let protoObj = {}.extend(source);
-protoObj.proto = this.proto;
-this.proto = protoObj;
-return this;
+      throw new Error('prototype of include object must be null or same as base object.');
+    let protoObj = {}.extend(source);
+    protoObj.proto = this.proto;
+    this.proto = protoObj;
+    return this;
   }
 });
 
@@ -114,3 +118,4 @@ Object.defineProperty(Object.prototype, 'objType', {
 Object.defineProperty(Object.prototype, 'isTypeOf', {
   value: (typeStr, obj) => typeStr === Object.objType(obj)
 });
+}

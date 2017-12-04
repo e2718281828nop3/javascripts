@@ -5,30 +5,44 @@
 // @license GPLv3
 // @namespace https://github.com/e2718281828nop3/
 // @exclude *
+if (!Object.prototype.hasOwnProperty('e2718281828nop3'))
+  throw new Error('require ext/object first.');
+
 const log = console.log;
 
 [HTMLCollection, NodeList].each(obj => {
-  Object.defineProperty(obj.prototype, 'first', {
-    get: function(){return this[0];}
-  });
-  Object.defineProperty(obj.prototype, 'last', {
-    get: function(){return this[this.length-1];}
-  });
+  if (!obj.prototype.hasOwnProperty('first')) {
+    Object.defineProperty(obj.prototype, 'first', {
+      get: function(){return this[0];}
+    });
+  }
+  if (!obj.prototype.hasOwnProperty('last')) {
+    Object.defineProperty(obj.prototype, 'last', {
+      get: function(){return this[this.length-1];}
+    });
+  }
 });
 
-Element.prototype.appendChildren = function(){
-  for(let i = 0; i < arguments.length; i++) {
-    if (Object.isTypeOf('array', arguments[i])) {
-      arguments[i].forEach(function(e){this.appendChild(e);});
-    } else {
-      this.appendChild(arguments[i]);
+if (!Element.prototype.hasOwnProperty('appendChildren')) {
+  Object.defineProperty(
+    Element.prototype, 
+    'appendChildren',
+    {
+      value: function(){
+        for(let i = 0; i < arguments.length; i++) {
+          if (Object.isTypeOf('array', arguments[i])) {
+            arguments[i].forEach(function(e){this.appendChild(e);});
+          } else {
+            this.appendChild(arguments[i]);
+          }
+        }
+        return this;
+      }
     }
-  }
-  return this;
-};
+  );
+}
 
-Object.defineProperties(Element.prototype, {
-  'show': {value: function(e) {(e || this).style.display = 'block';}},
+({'show': {value: function(e) {(e || this).style.display = 'block';}},
   'hide': {value: function(e) {(e || this).style.display = 'none';}},
   '$': {value: Element.prototype.querySelector},
   '$all': {value: Element.prototype.querySelectorAll},
@@ -36,6 +50,9 @@ Object.defineProperties(Element.prototype, {
   '$class': {value: Element.prototype.getElementsByClassName},
   '$tag': {value: Element.prototype.getElementsByTagName},
   '$last': {value: function(str) {return this.$all(str).last;}},
+}).each(function(v, k){
+  if (!Element.prototype.hasOwnProperty(k))
+    Object.defineProperty(Element.prototype, k, v);
 });
 
 const $ = str => document.querySelector(str);

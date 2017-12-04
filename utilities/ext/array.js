@@ -5,11 +5,18 @@
 // @license GPLv3
 // @namespace https://github.com/e2718281828nop3/
 // @exclude *
-Object.defineProperties(Array.prototype, {
-    'first': {
-        get: function(){return this[0];}
-    },
-    'last': {
-        get: function(){return this[this.length-1];}
-    },
-});
+if (!Array.prototype.hasOwnProperty('first')) {
+  Object.defineProperties(Array.prototype, {
+      'first': {
+          get: function(){return this[0];}
+      },
+  });
+}
+
+if (!Array.prototype.hasOwnProperty('last')) {
+  Object.defineProperties(Array.prototype, {
+      'last': {
+          get: function(){return this[this.length-1];}
+      },
+  });
+}
